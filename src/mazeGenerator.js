@@ -1,9 +1,17 @@
-
+import React, { useState } from 'react';
+import food_img from './assets/food.svg';
+import mario_img from './assets/mario.svg';
 
 export default function Maze(props) {
 
     const renderBlock = (i)=> {
-      return <Block value={i} />;
+      if(props.foodLoc.indexOf(i) !== -1){
+        return <Block value={i} image={`url(${food_img})`} />;
+      }else if(props.marioLoc === i){
+        return <Block value={i} image={`url(${mario_img})`} />;
+      }else{
+        return <Block value={i} image={'none'} />;
+      }
     }
   
     const addColumn = (row) => {
@@ -33,11 +41,19 @@ export default function Maze(props) {
 }
 
 function Block(props) {
-    const handleClick = () => {
-      alert(props.value);
-    }
+  const [image, setImage] = useState(props.image);
+
+  const handleClick = () => {
+    alert(props.value);
+  }
+
+  var blockStyle = {
+    backgroundSize: "20px",
+    backgroundRepeat  : 'no-repeat',
+    backgroundPosition: 'center',
+    backgroundImage: image
+  };
   
-    return <button className="block" id={"block" + props.value} onClick={handleClick} >
-      {props.value}
-    </button>;
+  return <button style={ blockStyle } className="block" id={"block_" + props.value} onClick={handleClick} >
+  </button>;
 }
