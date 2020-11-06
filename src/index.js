@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import './index.css';
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect} from 'react';
 //import { getInput, randomPositions } from './utils';
 import Maze from './mazeGenerator';
 import Controller from './characterController';
@@ -25,14 +25,14 @@ function Game() {
       marioLoc: centreMario,
       inputX: input.x,
       inputY: input.y,
-      currentDirection: null
+      currentDirection: null,
+      score: 0
     }));
 
   }, []);
 
 
-
-  let maze;
+  let maze, score = mazeData.score;
   if(mazeData.marioLoc){
     maze =(
       <MazeState.Provider value={[mazeData, setMazeData]}>
@@ -49,7 +49,16 @@ function Game() {
       <div className="game-maze">
         {maze}
       </div>
+      <div className="separator"></div>
       <div className="game-info">
+        <div className="score">
+          <p className="score-text">Steps: {score}</p>
+        </div>
+        <div className="play-info">
+          <h3>Controls: </h3>
+          <p>Use ←↕→ Arrow Keys on keyboard to move</p>
+        </div>
+        <div className="tag-line">Run Like the Wind !!!</div>
       </div>
     </div>
   );
