@@ -1,24 +1,28 @@
-import React, { useContext, useLayoutEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { MazeState } from './globalStates';
 
 
 export default function Controller() {
     const [mazeData, setMazeData] = useContext(MazeState);
+    const [control, setControl] = useState({
+        gameInterval: null
+    });
 
-    const eatFood = (i) => {
-        const found = mazeData.randomFoods.indexOf(mazeData.marioLoc + i);
-        if(found !== -1){
-            const updatedFood = mazeData.randomFoods.filter((item) => item!== (mazeData.marioLoc + i));
-            
+    useEffect(() => {
+        const found = mazeData.randomFoods.indexOf(mazeData.marioLoc);
+        if(found !==-1){
+            const updatedFood = mazeData.randomFoods.filter((item) => item!== (mazeData.marioLoc));
             setMazeData(prev => ({
                 ...prev,
                 randomFoods: updatedFood
             }));
         }
-    }
+
+        isBoundary();
+    
+    }, [mazeData, setMazeData]); 
 
     const moveRight = () => {
-        eatFood(1);
         setMazeData(prev => ({
             ...prev,
             marioLoc: prev.marioLoc + 1
@@ -26,7 +30,6 @@ export default function Controller() {
     }
   
     const moveLeft = () => {
-        eatFood(-1);
         setMazeData(prev => ({
             ...prev,
             marioLoc: prev.marioLoc - 1
@@ -34,7 +37,6 @@ export default function Controller() {
     }
 
     const moveUp = () => {
-        eatFood(-mazeData.inputX);
         setMazeData(prev => ({
             ...prev,
             marioLoc: prev.marioLoc - prev.inputX
@@ -42,7 +44,6 @@ export default function Controller() {
     }
 
     const moveDown = () => {
-        eatFood(mazeData.inputX);
         setMazeData(prev => ({
             ...prev,
             marioLoc: prev.marioLoc + prev.inputX
@@ -52,23 +53,54 @@ export default function Controller() {
     document.onkeydown = function(event) { 
         switch (event.key) {  
             case 'ArrowUp':
-                if(mazeData.marioLoc - mazeData.inputX > 0){
-                    moveUp();
-                }
+                gameLoop(moveUp);
                 break; 
             case 'ArrowLeft': 
-                moveLeft();
+                gameLoop(moveLeft);
                 break;
             case 'ArrowRight':
-                moveRight(); 
+                gameLoop(moveRight);
                 break; 
             case 'ArrowDown':
-                if((mazeData.marioLoc + mazeData.inputX) < mazeData.inputX*mazeData.inputY){
-                    moveDown();
-                } 
+                gameLoop(moveDown);
                 break; 
+            default:
+                console.log("invalid key");
         }
     };
+
+    const isBoundary = () => {
+        if(mazeData.marioLoc + mazeData.inputX > mazeData.inputX * mazeData.inputY){
+            gameLoop(moveUp);    
+            return;
+        }else if(mazeData.marioLoc - mazeData.inputX < 0){
+            gameLoop(moveDown);    
+            return;
+        }else if((mazeData.marioLoc - 1)%mazeData.inputX === 0 ){
+            gameLoop(moveRight);    
+            return;
+        }else if((mazeData.marioLoc)%mazeData.inputX === 0 ){
+            gameLoop(moveLeft);    
+            return;
+        }
+        
+    }
+
+    const gameLoop = (moveFunction) => {
+
+        if(control.gameInterval !== null){
+            clearInterval(control.gameInterval);
+        }
+
+        let tempInterval = setInterval(() => {
+            moveFunction();
+        }, 400);
+
+        setControl(prev => ({
+            ...prev,
+            gameInterval: tempInterval
+        }));
+    }
 
     return (
       <div className="controller"></div>
