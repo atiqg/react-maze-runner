@@ -5,35 +5,67 @@ import { MazeState } from './globalStates';
 export default function Controller() {
     const [mazeData, setMazeData] = useContext(MazeState);
 
+    const eatFood = (i) => {
+        const found = mazeData.randomFoods.indexOf(mazeData.marioLoc + i);
+        if(found !== -1){
+            const updatedFood = mazeData.randomFoods.filter((item) => item!== (mazeData.marioLoc + i));
+            
+            setMazeData(prev => ({
+                ...prev,
+                randomFoods: updatedFood
+            }));
+        }
+    }
+
     const moveRight = () => {
+        eatFood(1);
         setMazeData(prev => ({
             ...prev,
-            centreMario: prev.centreMario + 1
+            marioLoc: prev.marioLoc + 1
         }));
     }
   
     const moveLeft = () => {
+        eatFood(-1);
         setMazeData(prev => ({
             ...prev,
-            centreMario: prev.centreMario - 1
+            marioLoc: prev.marioLoc - 1
+        }));
+    }
+
+    const moveUp = () => {
+        eatFood(-mazeData.inputX);
+        setMazeData(prev => ({
+            ...prev,
+            marioLoc: prev.marioLoc - prev.inputX
+        }));
+    }
+
+    const moveDown = () => {
+        eatFood(mazeData.inputX);
+        setMazeData(prev => ({
+            ...prev,
+            marioLoc: prev.marioLoc + prev.inputX
         }));
     }
 
     document.onkeydown = function(event) { 
         switch (event.key) {  
-            case 'ArrowUp': 
-                console.log('Up Key pressed!'); 
+            case 'ArrowUp':
+                if(mazeData.marioLoc - mazeData.inputX > 0){
+                    moveUp();
+                }
                 break; 
             case 'ArrowLeft': 
                 moveLeft();
-                console.log('Left Key pressed!');
                 break;
             case 'ArrowRight':
                 moveRight(); 
-                console.log('Right Key pressed!'); 
                 break; 
-            case 'ArrowDown': 
-                console.log('Down Key pressed!'); 
+            case 'ArrowDown':
+                if((mazeData.marioLoc + mazeData.inputX) < mazeData.inputX*mazeData.inputY){
+                    moveDown();
+                } 
                 break; 
         }
     };

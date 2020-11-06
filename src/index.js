@@ -22,7 +22,9 @@ function Game() {
     setMazeData(mazeData => ({
       ...mazeData, 
       randomFoods: randomFoods,
-      centreMario: centreMario
+      marioLoc: centreMario,
+      inputX: input.x,
+      inputY: input.y
     }));
 
   }, []);
@@ -30,10 +32,10 @@ function Game() {
 
 
   let maze;
-  if(mazeData.centreMario){
+  if(mazeData.marioLoc){
     maze =(
       <MazeState.Provider value={[mazeData, setMazeData]}>
-        <Maze x={input.x} y={input.y} foodLoc={mazeData.randomFoods} marioLoc={mazeData.centreMario} />
+        <Maze x={input.x} y={input.y} foodLoc={mazeData.randomFoods} marioLoc={mazeData.marioLoc} />
         <Controller />
       </MazeState.Provider>
     );
