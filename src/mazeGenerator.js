@@ -1,12 +1,9 @@
-import React, { useState, useLayoutEffect, useContext } from 'react';
+import React from 'react';
 import food_img from './assets/food.svg';
 import mario_img from './assets/mario.svg';
-import GlobalState from './globalMazeData';
+//import { MazeState } from './globalStates';
 
 export default function Maze(props) {
-  const [mazeData, setMazeData] = useContext(GlobalState);
-
-  console.log(mazeData.test);
 
   const renderBlock = (blockCount)=> {
 
@@ -47,7 +44,7 @@ export default function Maze(props) {
 }
 
 function Block(props) {
-  const [image, setImage] = useState(props.image);
+  //const [image, setImage] = useState(props.image);
 
   const handleClick = () => {
     alert(props.value);
@@ -63,7 +60,7 @@ function Block(props) {
     backgroundSize: "20px",
     backgroundRepeat  : 'no-repeat',
     backgroundPosition: 'center',
-    backgroundImage: image
+    backgroundImage: props.image
   };
   
   return <button style={ blockStyle } className="block" id={"block_" + props.value} onClick={handleClick} >
