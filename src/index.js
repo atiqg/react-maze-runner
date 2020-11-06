@@ -24,7 +24,8 @@ function Game() {
       randomFoods: randomFoods,
       marioLoc: centreMario,
       inputX: input.x,
-      inputY: input.y
+      inputY: input.y,
+      currentDirection: null
     }));
 
   }, []);
