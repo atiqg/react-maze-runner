@@ -43,7 +43,7 @@ p, h3{
 
 .status {
   margin-bottom: 10px;
-  font-size: 28px;
+  font-size: 22px;
 }
 
 .block {
@@ -53,12 +53,12 @@ p, h3{
   font-size: 24px;
   font-weight: bold;
   line-height: 34px;
-  height: 50px;
-  width: 50px;
+  height: 34px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
   text-align: center;
+  width: 34px;
 }
 
 .block:focus {
@@ -90,11 +90,11 @@ p, h3{
 .score{
   margin-top: 10%;
   align-self: center;
-  font-size: 38px;
+  font-size: 30px;
 }
 
 .score-text{
-  padding: 10px;
+  padding: 5px;
   height: max-content;
   width: 25vw;
   text-align: center;
@@ -108,14 +108,12 @@ p, h3{
   margin-top: 15%;
   color: #545657;
   font-family: 'Nunito', sans-serif;
-  font-size: 21px;
 }
 
 .tag-line{
   align-self: center;
   margin-top: 25%;
-  font-size: 25px;
+  font-size: 20px;
   color: #545657;
   font-family: 'Nunito', sans-serif;
 }
-  
