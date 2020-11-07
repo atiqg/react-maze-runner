@@ -1,7 +1,6 @@
 import React from 'react';
 import food_img from './assets/food.svg';
 import mario_img from './assets/mario.svg';
-//import { MazeState } from './globalStates';
 
 export default function Maze(props) {
 
@@ -44,17 +43,6 @@ export default function Maze(props) {
 }
 
 function Block(props) {
-  //const [image, setImage] = useState(props.image);
-
-  const handleClick = () => {
-    alert(props.value);
-  }
-
-  /* 
-  useEffect(() => {
-    setImage(image);
-  }, [image]);
-  */
 
   var blockStyle = {
     backgroundSize: "20px",
@@ -63,6 +51,6 @@ function Block(props) {
     backgroundImage: props.image
   };
   
-  return <button style={ blockStyle } className="block" id={"block_" + props.value} onClick={handleClick} >
+  return <button style={ blockStyle } className="block" id={"block_" + props.value}>
   </button>;
 }

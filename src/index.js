@@ -52,11 +52,12 @@ function Game() {
       <div className="separator"></div>
       <div className="game-info">
         <div className="score">
-          <p className="score-text">Steps: {score}</p>
+          <p className="score-text">Score: {score}</p>
         </div>
         <div className="play-info">
-          <h3>Controls: </h3>
-          <p>Use ←↕→ Arrow Keys on keyboard to move</p>
+          <h3>Controls and Info: </h3>
+          <p>* Use ←↕→ Arrow Keys on keyboard to move.</p>
+          <p>* Lesser <b>score</b> is better.</p>
         </div>
         <div className="tag-line">Run Like the Wind !!!</div>
       </div>
