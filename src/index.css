@@ -21,10 +21,24 @@ p, h3{
   margin-inline-end: 0px;
 }
 
+.game {
+  margin: 5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
 .maze-row:after {
   clear: both;
   content: "";
   display: table;
+}
+
+.game-maze{
+  color: #3f3e3e;
+  font-family: "Oswald";
+  font-weight: bolder;
+  user-select: none;
 }
 
 .status {
@@ -55,19 +69,12 @@ p, h3{
   background: #ddd;
 }
 
-.game-maze{
-  color: #42376A;
-  font-family: "Oswald";
-  font-weight: bolder;
-  user-select: none;
+
+.separator{
+  height: 80vh;
+  border: 0.5px solid #4e4e4e;;
 }
 
-.game {
-  margin: 5%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
 
 .game-info {
   display: flex;
@@ -75,14 +82,9 @@ p, h3{
   margin-top: 20px;
   width: 35vw;
   height: 70vh;
-  border: 0.5px dotted #42376A;
+  border: 0.5px dotted #3f3e3e;;
   border-radius: 3px;
   user-select: none;
-}
-
-.separator{
-  height: 80vh;
-  border: 0.5px solid #42376A;
 }
 
 .score{
@@ -96,7 +98,7 @@ p, h3{
   height: max-content;
   width: 25vw;
   text-align: center;
-  color: #42376A;
+  color: #3f3e3e;
   background-color: #EBF0F2;
   border-radius: 5px;
 }

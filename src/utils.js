@@ -2,16 +2,15 @@
 export function getInput(){
     let input = {};
 
-    input['x'] = prompt("Please enter border width (min:5 max:15)");
-    input['y'] = prompt("Please enter border height (min:5 max:15)");
+    input['x'] = prompt("Please enter border width (Min:3 Max:11)");
+    input['y'] = prompt("Please enter border height (Min:3 Max:11)");
 
     if(!parseInt(input.x, 10) || !parseInt(input.y, 10)){
-      console.log(input.x, input.y);
       input['x'] = 10;
       input['y'] = 10;
     }
 
-    if(input.x<3 || input.x>15 || input.y<3 || input.y>15){
+    if(input.x<3 || input.x>11 || input.y<3 || input.y>11){
       input['x'] = 10;
       input['y'] = 10;
     }
@@ -24,7 +23,7 @@ export function randomPositions(inputX, inputY) {
   const requiredFoods = Math.floor((inputX+inputY)/2);
 
 
-  if(inputX*inputY%2 === 1){
+  if(inputY%2 === 1){
     requiredCentre = Math.ceil((inputX*inputY)/2);
   }else{
     requiredCentre = Math.ceil((inputX*inputY)/2) - Math.ceil(inputX/2);

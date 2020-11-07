@@ -1,18 +1,14 @@
 import ReactDOM from 'react-dom';
 import './index.css';
 import React, { useState, useLayoutEffect} from 'react';
-//import { getInput, randomPositions } from './utils';
+import { getInput, randomPositions } from './utils';
 import Maze from './mazeGenerator';
 import Controller from './characterController';
 
 import { MazeState } from './globalStates';
 
-//let input = getInput();
-let input = {'x':10, 'y':10};
-
-//const [randomFoods, centreMario] = randomPositions(parseInt(input.x), parseInt(input.y));
-const randomFoods = [95, 82, 67, 62, 93, 9, 11, 63, 42, 76];
-const centreMario = 45;
+let input = getInput();
+const [randomFoods, centreMario] = randomPositions(parseInt(input.x), parseInt(input.y));
 
 
 function Game() {
@@ -23,8 +19,8 @@ function Game() {
       ...mazeData, 
       randomFoods: randomFoods,
       marioLoc: centreMario,
-      inputX: input.x,
-      inputY: input.y,
+      inputX: parseInt(input.x),
+      inputY: parseInt(input.y),
       currentDirection: null,
       score: 0
     }));

@@ -8,6 +8,13 @@ export default function Controller() {
         gameInterval: null
     });
 
+    useLayoutEffect(() => {
+        if( mazeData.randomFoods.length < 1){
+            clearInterval(control.gameInterval);
+            alert("You did it in " + mazeData.score + " Steps");
+        }
+    }, [mazeData, control]);
+
     useEffect(() => {
         const found = mazeData.randomFoods.indexOf(mazeData.marioLoc);
         if(found !==-1){
@@ -19,15 +26,7 @@ export default function Controller() {
         }
         isBoundary();
     
-    }, [mazeData, setMazeData]); 
-
-    
-    useLayoutEffect(() => {
-        if( mazeData.randomFoods.length < 1){
-            clearInterval(control.gameInterval);
-            alert("You did it in " + mazeData.score + " Steps");
-        }
-      }, [mazeData, control]);
+    }, [mazeData, setMazeData]);
 
     document.onkeydown = function(event) { 
         switch (event.key) {  

@@ -3,6 +3,23 @@ import food_img from './assets/food.svg';
 import mario_img from './assets/mario.svg';
 
 export default function Maze(props) {
+  const status = 'MAZE RUNNER';
+
+  const addRows = () =>{
+    let rows = [];
+    for(let i=0; i<props.y; i++){
+      rows.push(<div className="maze-row">{addColumn(i)}</div>);
+    }
+    return rows;
+  }
+
+  const addColumn = (row) => {
+    let column = [];
+    for(let i=0; i<props.x; i++ ){
+      column.push(renderBlock(props.x*row + (i + 1)));
+    }
+    return column;
+  }
 
   const renderBlock = (blockCount)=> {
 
@@ -14,25 +31,7 @@ export default function Maze(props) {
       return <Block value={blockCount} image={'none'} />;
     }
 
-  }
-
-  const addColumn = (row) => {
-    let column = [];
-    for(let i=0; i<props.x; i++ ){
-      column.push(renderBlock(props.x*row + (i + 1)));
-    }
-    return column;
-  }
-
-  const addRows = () =>{
-    let rows = [];
-    for(let i=0; i<props.y; i++){
-      rows.push(<div className="maze-row">{addColumn(i)}</div>);
-    }
-    return rows;
-  }
-  
-  const status = 'MAZE RUNNER';
+  }  
 
   return (
     <div>
